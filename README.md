@@ -1,13 +1,16 @@
-# PawHome — Pet Adoption Center Management System
+# PawHome — CI/CD + Kubernetes Deployed Pet Adoption App
 
-A full-stack database application for managing a pet adoption center. Built as a university database course project demonstrating relational database design (PostgreSQL), indexing strategies, performance analysis, data import/export, and a web GUI.
+PawHome is a Flask + PostgreSQL application designed to be deployed through a GitOps workflow on a Kubernetes cluster (k3s compatible) using Argo CD. This repository now prioritizes CI/CD deployment readiness while keeping the original database course implementation and analysis modules.
 
 ---
 
 ## Table of Contents
 
+- [Deployment First (CI/CD + Argo CD)](#deployment-first-cicd--argo-cd)
+- [Release Workflow (GitOps)](#release-workflow-gitops)
 - [Project Overview](#project-overview)
 - [Tech Stack](#tech-stack)
+- [Kubernetes Deployment (k3s + Argo CD Ready)](#kubernetes-deployment-k3s--argo-cd-ready)
 - [Database Schema (Relational)](#database-schema-relational)
   - [Tables Overview](#tables-overview)
   - [Schema Diagram](#schema-diagram)
@@ -16,8 +19,53 @@ A full-stack database application for managing a pet adoption center. Built as a
 - [Performance Analysis](#performance-analysis)
 - [Data Export / Import (XML & JSON)](#data-export--import-xml--json)
 - [GUI Application](#gui-application)
-- [Setup & Installation](#setup--installation)
+- [Local Setup (Non-Kubernetes)](#local-setup-non-kubernetes)
 - [Project Structure](#project-structure)
+
+---
+
+## Deployment First (CI/CD + Argo CD)
+
+This project is structured for cluster-first delivery:
+
+- Kubernetes manifests live in `k8s/` and are rendered via `k8s/kustomization.yaml`.
+- Argo CD application manifest lives in `argocd/pawhome-application.yaml`.
+- PostgreSQL, application deployment, DB secret, and DB bootstrap SQL are all declarative manifests.
+- Cluster target is standard Kubernetes API and works on Ubuntu k3s.
+
+### Deploy in 5 steps
+
+1. Build and push your app image.
+2. Update image tag in `k8s/app.yaml`.
+3. Set DB password in `k8s/postgres-secret.yaml`.
+4. Set Git repo URL in `argocd/pawhome-application.yaml`.
+5. Apply Argo application once:
+
+```bash
+kubectl apply -f argocd/pawhome-application.yaml -n argocd
+```
+
+After that, Argo CD tracks this repo and reconciles changes automatically.
+
+---
+
+## Release Workflow (GitOps)
+
+| Step | Action | Trigger |
+|---|---|---|
+| 1 | Commit and push code/manifests | Developer push |
+| 2 | Build and push Docker image with new tag | CI pipeline or local build |
+| 3 | Update `k8s/app.yaml` image tag and push | Git change |
+| 4 | Argo CD detects Git change and syncs cluster | Auto-sync |
+| 5 | Verify pods/services/PVC and app health | Post-deploy checks |
+
+Recommended command checks:
+
+```bash
+kubectl -n pawhome get pods,svc,pvc
+kubectl -n pawhome logs deployment/pawhome-web
+kubectl -n pawhome logs statefulset/pawhome-postgres
+```
 
 ---
 
@@ -379,7 +427,9 @@ A web application built with **Flask + Jinja2 + Bootstrap 5**, accessible at `ht
 
 ---
 
-## Setup & Installation
+## Local Setup (Non-Kubernetes)
+
+Use this section only for local development. For cluster deployments, use the Argo CD flow above.
 
 ### Prerequisites
 

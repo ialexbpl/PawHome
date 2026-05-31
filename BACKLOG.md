@@ -9,6 +9,7 @@
 - [x] Add declarative DB init ConfigMap and DB secret manifest for sync-based deploys (`k8s/db-init-configmap.yaml`, `k8s/postgres-secret.yaml`).
 - [x] Add Argo CD `Application` manifest template for one-command bootstrap (`argocd/pawhome-application.yaml`).
 - [x] Add repository `.gitignore` for Python, local env files, and generated artifacts.
+- [x] Refocus README to lead with CI/CD and Kubernetes GitOps deployment workflow.
 
 ## Next
 - [ ] Add ingress manifest (or gateway) for stable external access without port-forward.
