@@ -1,17 +1,17 @@
 # Backlog
 
 ## Done
-- [x] Add Kubernetes namespace manifest for isolated deployment (`k8s/namespace.yaml`).
-- [x] Add PostgreSQL Kubernetes manifests with persistent storage and internal service (`k8s/postgres.yaml`).
-- [x] Add Flask app Kubernetes manifests wired to PostgreSQL service and secret (`k8s/app.yaml`).
+- [x] Add Kubernetes namespace manifest for isolated deployment (`k8s/namespace-pawhome.yaml`).
+- [x] Add PostgreSQL Kubernetes manifests with persistent storage and internal service (`k8s/postgres-statefulset-pvc-service.yaml`).
+- [x] Add Flask app Kubernetes manifests wired to PostgreSQL service and secret (`k8s/web-deployment-service.yaml`).
 - [x] Add one-command PowerShell push and deploy workflow for Docker image + Kubernetes resources (`scripts/push-and-deploy.ps1`).
 - [x] Convert Kubernetes deployment to GitOps-friendly declarative resources for Argo CD (`k8s/kustomization.yaml`).
 - [x] Add declarative DB init ConfigMap and DB secret manifest for sync-based deploys (`k8s/db-init-configmap.yaml`, `k8s/postgres-secret.yaml`).
 - [x] Add Argo CD `Application` manifest template for one-command bootstrap (`argocd/pawhome-application.yaml`).
 - [x] Add repository `.gitignore` for Python, local env files, and generated artifacts.
 - [x] Refocus README to lead with CI/CD and Kubernetes GitOps deployment workflow.
-- [x] Expose app service as MetalLB `LoadBalancer` with fixed IP for cluster access (`k8s/app.yaml`).
-- [x] Add static PV + manual storage class binding for clusters without dynamic provisioner (`k8s/postgres-pv.yaml`, `k8s/postgres.yaml`).
+- [x] Expose app service as MetalLB `LoadBalancer` with fixed IP for cluster access (`k8s/web-deployment-service.yaml`).
+- [x] Add static PV + manual storage class binding for clusters without dynamic provisioner (`k8s/postgres-pv.yaml`, `k8s/postgres-statefulset-pvc-service.yaml`).
 - [x] Remove Docker Compose file to keep repository Kubernetes/Argo focused.
 - [x] Align README deployment path to k3s + Argo CD + MetalLB with GHCR pull-secret flow.
 - [x] Upgrade Kubernetes PostgreSQL runtime image from `postgres:16` to `postgres:18`.

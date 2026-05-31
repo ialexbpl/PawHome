@@ -36,7 +36,7 @@ This project is structured for cluster-first delivery:
 ### Deploy in 5 steps
 
 1. Build and push your app image.
-2. Update image tag in `k8s/app.yaml`.
+2. Update image tag in `k8s/web-deployment-service.yaml`.
 3. Set DB password in `k8s/postgres-secret.yaml`.
 4. Set Git repo URL in `argocd/pawhome-application.yaml`.
 5. Apply Argo application once:
@@ -55,7 +55,7 @@ After that, Argo CD tracks this repo and reconciles changes automatically.
 |---|---|---|
 | 1 | Commit and push code/manifests | Developer push |
 | 2 | Build and push Docker image with new tag | CI pipeline or local build |
-| 3 | Update `k8s/app.yaml` image tag and push | Git change |
+| 3 | Update `k8s/web-deployment-service.yaml` image tag and push | Git change |
 | 4 | Argo CD detects Git change and syncs cluster | Auto-sync |
 | 5 | Verify pods/services/PVC and app health | Post-deploy checks |
 
@@ -589,10 +589,11 @@ Database-labs/
 ├── .env                        # DB connection config (not in git)
 ├── k8s/
 │   ├── kustomization.yaml      # Argo sync entrypoint
-│   ├── app.yaml                # Flask Deployment + LoadBalancer service
-│   ├── postgres.yaml           # PostgreSQL StatefulSet + PVC + service
+│   ├── web-deployment-service.yaml        # Flask Deployment + LoadBalancer service
+│   ├── postgres-statefulset-pvc-service.yaml # PostgreSQL StatefulSet + PVC + service
 │   ├── postgres-pv.yaml        # Static PV for clusters without StorageClass
 │   ├── postgres-secret.yaml    # DB credentials (replace for production)
+│   ├── namespace-pawhome.yaml  # Namespace definition
 │   └── db-init-configmap.yaml  # SQL bootstrap scripts
 ├── db/
 │   └── postgres_connection.py  # psycopg2 connection helper

@@ -44,10 +44,20 @@ spec:
                   name: pawhome-postgres-secret
                   key: POSTGRES_PASSWORD
           volumeMounts:
-          - name: postgres-data
-            mountPath: /var/lib/postgresql/data
-          - name: postgres-init
-            mountPath: /docker-entrypoint-initdb.d
+            - name: postgres-data
+              mountPath: /var/lib/postgresql
+            - name: postgres-init
+              mountPath: /docker-entrypoint-initdb.d
+          readinessProbe:
+            tcpSocket:
+              port: 5432
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 5432
+            initialDelaySeconds: 20
+            periodSeconds: 20
       volumes:
         - name: postgres-data
           persistentVolumeClaim:

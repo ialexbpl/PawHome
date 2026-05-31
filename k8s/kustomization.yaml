@@ -4,9 +4,9 @@ kind: Kustomization
 namespace: pawhome
 
 resources:
-  - namespace.yaml
+  - namespace-pawhome.yaml
   - postgres-pv.yaml
   - postgres-secret.yaml
   - db-init-configmap.yaml
-  - postgres.yaml
-  - app.yaml
+  - postgres-statefulset-pvc-service.yaml
+  - web-deployment-service.yaml
