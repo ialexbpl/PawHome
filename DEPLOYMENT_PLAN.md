@@ -1,21 +1,24 @@
-# Deployment Plan (Argo CD + k3s)
+# Deployment Plan (Argo CD + external PostgreSQL)
 
 ## Goal
-Deploy PawHome on a 3-node Ubuntu k3s cluster with Argo CD and PostgreSQL 18.
+Deploy PawHome web app on a 3-node Ubuntu k3s cluster with Argo CD, while PostgreSQL 18 runs in Docker on a VM.
 
 ## Pre-checks
 1. Verify cluster and nodes:
    - `kubectl get nodes -o wide`
 2. Verify Argo CD namespace exists:
    - `kubectl get ns argocd`
-3. Verify default StorageClass exists (`local-path` for k3s):
-   - `kubectl get storageclass`
+3. Verify control-plane node can reach VM PostgreSQL host on TCP 5432.
 
 ## Required Repo Settings
-1. Set a real DB password in `k8s/postgres-secret.yaml`.
-2. Set your app image tag in `k8s/web-deployment-service.yaml`:
+1. Start PostgreSQL on VM (Docker) and initialize schema:
+   - `docker run ... -v pawhome-pgdata:/var/lib/postgresql postgres:18`
+   - `cat sql/create_schema.sql sql/seed_dictionaries.sql | docker exec -i pawhome-postgres psql -U postgres -d pawhome`
+2. Set a real DB password in `k8s/postgres-secret.yaml`.
+3. Set external DB host in `k8s/web-deployment-service.yaml` (`DB_HOST`).
+4. Set your app image tag in `k8s/web-deployment-service.yaml`:
    - `ghcr.io/ialexbpl/pawhome:<tag>`
-3. Confirm Argo source repository in `argocd/pawhome-application.yaml`:
+5. Confirm Argo source repository in `argocd/pawhome-application.yaml`:
    - `spec.source.repoURL`
    - `spec.source.targetRevision`
 
@@ -30,14 +33,12 @@ kubectl apply -f argocd/pawhome-application.yaml -n argocd
 1. Argo app status:
    - `kubectl get application -n argocd`
 2. Workload status:
-   - `kubectl -n pawhome get pods,svc,pvc`
-3. Check PostgreSQL boot logs:
-   - `kubectl -n pawhome logs statefulset/pawhome-postgres`
+   - `kubectl -n pawhome get pods,svc`
+3. Check app can connect to external DB in logs.
 4. Check web app logs:
    - `kubectl -n pawhome logs deployment/pawhome-web`
 
 ## Troubleshooting
-1. If PostgreSQL used an older PVC layout, recreate the PVC:
-   - `kubectl -n pawhome delete pvc pawhome-postgres-pvc`
-2. If image is private, create `regcred` and add `imagePullSecrets` to web Deployment.
-3. If `LoadBalancer` has no external IP, verify MetalLB installation and pool configuration.
+1. If image is private, create `regcred` and add `imagePullSecrets` to web Deployment.
+2. If `LoadBalancer` has no external IP, verify MetalLB installation and pool configuration.
+3. If app cannot connect to DB, verify VM firewall and network ACLs allow `5432/tcp` from cluster nodes.

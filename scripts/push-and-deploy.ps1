@@ -6,6 +6,9 @@ param(
     [string]$ImageTag = "latest",
 
     [Parameter(Mandatory = $true)]
+    [string]$DbHost,
+
+    [Parameter(Mandatory = $true)]
     [string]$DbPassword
 )
 
@@ -29,11 +32,13 @@ kubectl -n pawhome create secret generic pawhome-postgres-secret `
   --from-literal=POSTGRES_PASSWORD="$DbPassword" `
   --dry-run=client -o yaml | kubectl apply -f -
 
+Write-Host "==> Setting external DB host to $DbHost"
+kubectl -n pawhome set env deployment/pawhome-web DB_HOST=$DbHost
+
 Write-Host "==> Setting app image to $image"
 kubectl -n pawhome set image deployment/pawhome-web pawhome-web=$image
 
 Write-Host "==> Waiting for rollouts"
-kubectl -n pawhome rollout status statefulset/pawhome-postgres --timeout=240s
 kubectl -n pawhome rollout status deployment/pawhome-web --timeout=240s
 
 Write-Host "`nDeployment complete."

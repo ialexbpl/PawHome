@@ -20,11 +20,13 @@
 - [x] Make Argo deployment multi-node friendly by using `local-path` PVC and removing mandatory private registry secret (`k8s/kustomization.yaml`, `k8s/postgres-statefulset-pvc-service.yaml`, `k8s/web-deployment-service.yaml`, `argocd/pawhome-application.yaml`).
 - [x] Remove legacy static PV and generated export/performance artifacts from git-tracked content (`k8s/postgres-pv.yaml`, `exports/`, `analysis/performance_results.md`).
 - [x] Add missing environment template and align deployment runbook/docs with current manifests (`.env.example`, `DEPLOYMENT_PLAN.md`, `README.md`).
+- [x] Refactor deployment model to app-only Kubernetes with external PostgreSQL (Docker on VM) and remove in-cluster DB manifests (`k8s/kustomization.yaml`, `k8s/web-deployment-service.yaml`, `scripts/push-and-deploy.ps1`, `README.md`, `DEPLOYMENT_PLAN.md`).
+- [x] Remove obsolete in-cluster PostgreSQL resources from repo (`k8s/postgres-statefulset-pvc-service.yaml`, `k8s/db-init-configmap.yaml`).
 
 ## Next
 - [ ] Add ingress manifest (or gateway) for stable external access without port-forward.
 - [ ] Add horizontal pod autoscaling for the web deployment.
-- [ ] Add backup/restore strategy for PostgreSQL PVC data.
+- [ ] Add backup/restore strategy for external Docker PostgreSQL data volume.
 - [ ] Add CI pipeline job that builds, pushes, and deploys to Kubernetes automatically.
 - [ ] Replace plain Secret with Sealed Secrets or External Secrets for safer Git storage.
 - [ ] Add Ingress + TLS (cert-manager) so app is reachable via DNS instead of bare LoadBalancer IP.

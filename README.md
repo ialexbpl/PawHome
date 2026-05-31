@@ -1,6 +1,6 @@
 # PawHome — CI/CD + Kubernetes Deployed Pet Adoption App
 
-PawHome is a Flask + PostgreSQL application designed to be deployed through a GitOps workflow on a Kubernetes cluster (k3s compatible) using Argo CD. This repository now prioritizes CI/CD deployment readiness while keeping the original database course implementation and analysis modules.
+PawHome is a Flask + PostgreSQL application designed to be deployed through a GitOps workflow on a Kubernetes cluster (k3s compatible) using Argo CD. The deployment model in this repository runs PostgreSQL outside Kubernetes (Docker on VM) and deploys only the web app in-cluster.
 
 ---
 
@@ -26,20 +26,22 @@ PawHome is a Flask + PostgreSQL application designed to be deployed through a Gi
 
 ## Deployment First (CI/CD + Argo CD)
 
-This project is structured for cluster-first delivery:
+This project is structured for app-only cluster delivery:
 
 - Kubernetes manifests live in `k8s/` and are rendered via `k8s/kustomization.yaml`.
 - Argo CD application manifest lives in `argocd/pawhome-application.yaml`.
-- PostgreSQL, application deployment, DB secret, and DB bootstrap SQL are all declarative manifests.
+- Kubernetes manifests deploy only the web app and its service.
+- PostgreSQL is expected as an external service (for example, Docker on a VM).
 - Cluster target is standard Kubernetes API and works on Ubuntu k3s.
 
-### Deploy in 5 steps
+### Deploy in 6 steps
 
 1. Build and push your app image.
 2. Update image tag in `k8s/web-deployment-service.yaml`.
-3. Set DB password in `k8s/postgres-secret.yaml`.
-4. Set Git repo URL in `argocd/pawhome-application.yaml`.
-5. Apply Argo application once:
+3. Set external DB host in `k8s/web-deployment-service.yaml` (`DB_HOST`).
+4. Set DB password in `k8s/postgres-secret.yaml`.
+5. Set Git repo URL in `argocd/pawhome-application.yaml`.
+6. Apply Argo application once:
 
 ```bash
 kubectl apply -f argocd/pawhome-application.yaml -n argocd
@@ -57,14 +59,13 @@ After that, Argo CD tracks this repo and reconciles changes automatically.
 | 2 | Build and push Docker image with new tag | CI pipeline or local build |
 | 3 | Update `k8s/web-deployment-service.yaml` image tag and push | Git change |
 | 4 | Argo CD detects Git change and syncs cluster | Auto-sync |
-| 5 | Verify pods/services/PVC and app health | Post-deploy checks |
+| 5 | Verify web deployment/service and app health | Post-deploy checks |
 
 Recommended command checks:
 
 ```bash
-kubectl -n pawhome get pods,svc,pvc
+kubectl -n pawhome get pods,svc
 kubectl -n pawhome logs deployment/pawhome-web
-kubectl -n pawhome logs statefulset/pawhome-postgres
 ```
 
 ---
@@ -504,9 +505,9 @@ python app.py
 
 ---
 
-## Kubernetes Deployment (k3s + Argo CD Ready)
+## Kubernetes Deployment (App-only in cluster)
 
-You can run both the **Flask app** and **PostgreSQL** on Kubernetes, including remote Ubuntu k3s clusters.
+You run **Flask app** in Kubernetes and **PostgreSQL** externally (Docker on VM is the reference path).
 
 ### Prerequisites
 
@@ -523,9 +524,27 @@ docker build -t ghcr.io/ialexbpl/pawhome:latest .
 docker push ghcr.io/ialexbpl/pawhome:latest
 ```
 
-### 2) Configure secrets
+### 2) Start PostgreSQL on your VM (Docker)
+
+```bash
+docker volume create pawhome-pgdata
+docker run -d \
+  --name pawhome-postgres \
+  --restart unless-stopped \
+  -e POSTGRES_DB=pawhome \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_PASSWORD='set-strong-password' \
+  -p 5432:5432 \
+  -v pawhome-pgdata:/var/lib/postgresql \
+  postgres:18
+
+cat sql/create_schema.sql sql/seed_dictionaries.sql | docker exec -i pawhome-postgres psql -U postgres -d pawhome
+```
+
+### 3) Configure app DB connection and secrets
 
 - Set DB password in `k8s/postgres-secret.yaml` (`POSTGRES_PASSWORD`).
+- Set external DB host in `k8s/web-deployment-service.yaml` (`DB_HOST`) to your VM IP.
 - If your GHCR image is private, create `regcred` and add it to the web Deployment:
 
 ```bash
@@ -546,7 +565,7 @@ spec:
         - name: regcred
 ```
 
-### 3) Deploy through Argo CD
+### 4) Deploy through Argo CD
 
 ```bash
 kubectl apply -f argocd/pawhome-application.yaml -n argocd
@@ -555,7 +574,7 @@ kubectl get applications -n argocd
 
 Argo syncs path `k8s/` via `k8s/kustomization.yaml`.
 
-### 4) Access app using MetalLB external IP
+### 5) Access app using MetalLB external IP
 
 ```bash
 kubectl -n pawhome get svc pawhome-web
@@ -568,27 +587,13 @@ Open `http://<EXTERNAL-IP>` from the returned service IP.
 ```bash
 kubectl -n pawhome get pods
 kubectl -n pawhome get svc
-kubectl -n pawhome get pvc
 kubectl -n pawhome logs deployment/pawhome-web
-kubectl -n pawhome logs statefulset/pawhome-postgres
 ```
 
-### Notes for 3-node Ubuntu k3s clusters
+### Notes
 
-This setup expects the default `local-path` StorageClass (k3s default) for PostgreSQL PVC provisioning:
-
-```bash
-kubectl get storageclass
-```
-
-If your cluster has no default StorageClass, create one first or update `k8s/postgres-statefulset-pvc-service.yaml` to your storage class name.
-
-If PostgreSQL was deployed before this change and keeps crash-looping, recreate the PVC so PG18 initializes with the correct data directory layout:
-
-```bash
-kubectl -n pawhome delete pvc pawhome-postgres-pvc
-kubectl -n pawhome delete pod pawhome-postgres-0 --force --grace-period=0
-```
+- Ensure Kubernetes nodes can reach VM PostgreSQL on TCP `5432`.
+- If needed, open firewall on VM (`ufw allow 5432/tcp`).
 
 ---
 
@@ -608,10 +613,8 @@ Database-labs/
 ├── k8s/
 │   ├── kustomization.yaml      # Argo sync entrypoint
 │   ├── web-deployment-service.yaml        # Flask Deployment + LoadBalancer service
-│   ├── postgres-statefulset-pvc-service.yaml # PostgreSQL StatefulSet + PVC + service
 │   ├── postgres-secret.yaml    # DB credentials (replace for production)
-│   ├── namespace-pawhome.yaml  # Namespace definition
-│   └── db-init-configmap.yaml  # SQL bootstrap scripts
+│   └── namespace-pawhome.yaml  # Namespace definition
 ├── scripts/
 │   └── push-and-deploy.ps1     # Optional non-Argo helper deploy script
 ├── db/
