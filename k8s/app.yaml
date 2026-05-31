@@ -18,7 +18,7 @@ spec:
       #   - name: regcred
       containers:
         - name: pawhome-web
-          image: ghcr.io/replace-me/pawhome:latest
+          image: ghcr.io/ialexbpl/pawhome:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
