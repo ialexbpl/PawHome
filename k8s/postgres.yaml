@@ -4,6 +4,7 @@ metadata:
   name: pawhome-postgres-pvc
   namespace: pawhome
 spec:
+  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:

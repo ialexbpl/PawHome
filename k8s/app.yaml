@@ -13,9 +13,8 @@ spec:
       labels:
         app: pawhome-web
     spec:
-      # Uncomment if your registry requires auth:
-      # imagePullSecrets:
-      #   - name: regcred
+      imagePullSecrets:
+        - name: regcred
       containers:
         - name: pawhome-web
           image: ghcr.io/ialexbpl/pawhome:latest
