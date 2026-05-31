@@ -510,41 +510,48 @@ You can run both the **Flask app** and **PostgreSQL** on Kubernetes, including r
 
 ### Prerequisites
 
-- Docker (logged in to your image registry)
-- `kubectl` connected to your cluster
-- A reachable image repository (Docker Hub, GHCR, ACR, etc.)
+- k3s cluster with Argo CD installed
+- MetalLB installed and configured with an IP pool
+- Docker available on any machine used to build/push image
+- A reachable container registry (GHCR is used below)
 
-### 1) Push your app image
+### 1) Build and push container image
 
-```powershell
-docker build -t ghcr.io/<your-user>/pawhome:v1 .
-docker push ghcr.io/<your-user>/pawhome:v1
+```bash
+docker login ghcr.io -u ialexbpl
+docker build -t ghcr.io/ialexbpl/pawhome:latest .
+docker push ghcr.io/ialexbpl/pawhome:latest
 ```
 
-### 2) Set image and DB password in manifests
+### 2) Configure secrets and image pull access
 
-- Update `k8s/app.yaml` image from `ghcr.io/replace-me/pawhome:latest` to your pushed image.
-- Update `k8s/postgres-secret.yaml` value `POSTGRES_PASSWORD`.
+- Set DB password in `k8s/postgres-secret.yaml` (`POSTGRES_PASSWORD`).
+- If GHCR package is private, create image pull secret in namespace:
 
-### 3) Deploy with Argo CD
+```bash
+kubectl -n pawhome create secret docker-registry regcred \
+  --docker-server=ghcr.io \
+  --docker-username=ialexbpl \
+  --docker-password='<GITHUB_PAT_WITH_read:packages>' \
+  --dry-run=client -o yaml | kubectl apply -f -
+```
 
-Apply the Argo CD `Application` manifest (after setting your repo URL):
+### 3) Deploy through Argo CD
 
 ```bash
 kubectl apply -f argocd/pawhome-application.yaml -n argocd
+kubectl get applications -n argocd
 ```
 
-Argo will sync path `k8s/` using `k8s/kustomization.yaml`.
+Argo syncs path `k8s/` via `k8s/kustomization.yaml`.
 
-### 4) Open the app
-
-For quick access:
+### 4) Access app using MetalLB external IP
 
 ```bash
-kubectl -n pawhome port-forward svc/pawhome-web 5000:5000
+kubectl -n pawhome get svc pawhome-web
 ```
 
-Then open: `http://localhost:5000`
+Open `http://<EXTERNAL-IP>` from the returned service IP.
 
 ### Useful checks
 
@@ -552,8 +559,18 @@ Then open: `http://localhost:5000`
 kubectl -n pawhome get pods
 kubectl -n pawhome get svc
 kubectl -n pawhome get pvc
+kubectl get pv
 kubectl -n pawhome logs deployment/pawhome-web
 kubectl -n pawhome logs statefulset/pawhome-postgres
+```
+
+### Notes for clusters without a StorageClass
+
+This repo includes a static PV (`k8s/postgres-pv.yaml`) and a PVC using `storageClassName: manual`. If PVC was previously created without storage class, delete and let Argo recreate it:
+
+```bash
+kubectl -n pawhome delete pvc pawhome-postgres-pvc
+kubectl -n pawhome delete pod pawhome-postgres-0 --force --grace-period=0
 ```
 
 ---
@@ -563,11 +580,20 @@ kubectl -n pawhome logs statefulset/pawhome-postgres
 ```
 Database-labs/
 ├── app.py                      # Flask web app — routes, CRUD, tools
+├── argocd/
+│   └── pawhome-application.yaml # Argo CD Application
 ├── generator.py                # Random data generator (Python + Faker)
 ├── benchmark.py                # Automated performance benchmark
 ├── requirements.txt            # Python dependencies
 ├── .env.example                # DB connection config template
 ├── .env                        # DB connection config (not in git)
+├── k8s/
+│   ├── kustomization.yaml      # Argo sync entrypoint
+│   ├── app.yaml                # Flask Deployment + LoadBalancer service
+│   ├── postgres.yaml           # PostgreSQL StatefulSet + PVC + service
+│   ├── postgres-pv.yaml        # Static PV for clusters without StorageClass
+│   ├── postgres-secret.yaml    # DB credentials (replace for production)
+│   └── db-init-configmap.yaml  # SQL bootstrap scripts
 ├── db/
 │   └── postgres_connection.py  # psycopg2 connection helper
 ├── sql/

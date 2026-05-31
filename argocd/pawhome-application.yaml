@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/ialexbpl/PawHome
+    repoURL: https://github.com/ialexbpl/PawHome.git
     targetRevision: HEAD
     path: k8s
   destination:

@@ -12,6 +12,8 @@
 - [x] Refocus README to lead with CI/CD and Kubernetes GitOps deployment workflow.
 - [x] Expose app service as MetalLB `LoadBalancer` with fixed IP for cluster access (`k8s/app.yaml`).
 - [x] Add static PV + manual storage class binding for clusters without dynamic provisioner (`k8s/postgres-pv.yaml`, `k8s/postgres.yaml`).
+- [x] Remove Docker Compose file to keep repository Kubernetes/Argo focused.
+- [x] Align README deployment path to k3s + Argo CD + MetalLB with GHCR pull-secret flow.
 
 ## Next
 - [ ] Add ingress manifest (or gateway) for stable external access without port-forward.
