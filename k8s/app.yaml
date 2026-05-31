@@ -61,11 +61,14 @@ kind: Service
 metadata:
   name: pawhome-web
   namespace: pawhome
+  # Uncomment and set your pool name if needed:
+  # annotations:
+  #   metallb.io/address-pool: your-pool-name
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: pawhome-web
   ports:
     - name: http
-      port: 5000
+      port: 80
       targetPort: 5000

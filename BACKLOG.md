@@ -10,6 +10,7 @@
 - [x] Add Argo CD `Application` manifest template for one-command bootstrap (`argocd/pawhome-application.yaml`).
 - [x] Add repository `.gitignore` for Python, local env files, and generated artifacts.
 - [x] Refocus README to lead with CI/CD and Kubernetes GitOps deployment workflow.
+- [x] Expose app service as MetalLB `LoadBalancer` with fixed IP for cluster access (`k8s/app.yaml`).
 
 ## Next
 - [ ] Add ingress manifest (or gateway) for stable external access without port-forward.
