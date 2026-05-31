@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: pawhome-web
-          image: ghcr.io/ialexbpl/pawhome:latest
+          image: ghcr.io/ialexbpl/pawhome:20260531-1421-59cf2fc
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
@@ -35,19 +35,19 @@ spec:
                   key: POSTGRES_PASSWORD
           startupProbe:
             httpGet:
-              path: /healthz/live
+              path: /
               port: 5000
             failureThreshold: 30
             periodSeconds: 5
           readinessProbe:
             httpGet:
-              path: /healthz/ready
+              path: /
               port: 5000
             initialDelaySeconds: 5
             periodSeconds: 10
           livenessProbe:
             httpGet:
-              path: /healthz/live
+              path: /
               port: 5000
             initialDelaySeconds: 10
             periodSeconds: 20
