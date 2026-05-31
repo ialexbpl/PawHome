@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}PawHome{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        .sidebar { width: 240px; min-height: 100vh; }
+        .sidebar .nav-link { color: #333; border-radius: .375rem; margin: 2px 8px; }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active { background: #0d6efd; color: #fff; }
+        .sidebar .nav-link i { width: 24px; }
+        .main-content { margin-left: 240px; }
+        .flash-pre { white-space: pre-wrap; font-size: .85rem; max-height: 300px; overflow-y: auto; }
+        @media (max-width: 768px) {
+            .sidebar { width: 100%; min-height: auto; }
+            .main-content { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="d-flex">
+    <!-- Sidebar -->
+    <nav class="sidebar bg-light border-end d-flex flex-column p-3 position-fixed">
+        <a href="/" class="d-flex align-items-center mb-3 text-decoration-none">
+            <i class="bi bi-heart-pulse-fill fs-4 text-primary me-2"></i>
+            <span class="fs-5 fw-bold">PawHome</span>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">
+                    <i class="bi bi-speedometer2 me-2"></i>Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if '/animals' in request.path %}active{% endif %}" href="/animals">
+                    <i class="bi bi-bug me-2"></i>Animals
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if '/adopters' in request.path %}active{% endif %}" href="/adopters">
+                    <i class="bi bi-people me-2"></i>Adopters
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if '/adoptions' in request.path %}active{% endif %}" href="/adoptions">
+                    <i class="bi bi-hand-thumbs-up me-2"></i>Adoptions
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if '/medical' in request.path %}active{% endif %}" href="/medical">
+                    <i class="bi bi-clipboard2-pulse me-2"></i>Medical
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if '/staff' in request.path %}active{% endif %}" href="/staff">
+                    <i class="bi bi-person-badge me-2"></i>Staff
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if '/donations' in request.path %}active{% endif %}" href="/donations">
+                    <i class="bi bi-currency-dollar me-2"></i>Donations
+                </a>
+            </li>
+            <li><hr></li>
+            <li class="nav-item">
+                <a class="nav-link {% if '/tools' in request.path %}active{% endif %}" href="/tools">
+                    <i class="bi bi-gear me-2"></i>Tools
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main content -->
+    <div class="main-content flex-grow-1 p-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for cat, msg in messages %}
+            <div class="alert alert-{{ cat }} alert-dismissible fade show" role="alert">
+                <div class="flash-pre">{{ msg }}</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pawhome-web
+  namespace: pawhome
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pawhome-web
+  template:
+    metadata:
+      labels:
+        app: pawhome-web
+    spec:
+      # Uncomment if your registry requires auth:
+      # imagePullSecrets:
+      #   - name: regcred
+      containers:
+        - name: pawhome-web
+          image: ghcr.io/replace-me/pawhome:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          env:
+            - name: DB_HOST
+              value: pawhome-postgres
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_NAME
+              value: pawhome
+            - name: DB_USER
+              value: postgres
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pawhome-postgres-secret
+                  key: POSTGRES_PASSWORD
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 40
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pawhome-web
+  namespace: pawhome
+spec:
+  type: ClusterIP
+  selector:
+    app: pawhome-web
+  ports:
+    - name: http
+      port: 5000
+      targetPort: 5000

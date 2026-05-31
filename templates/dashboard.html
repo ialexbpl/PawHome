@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — PawHome{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Dashboard</h2>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card text-bg-primary">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h6 class="card-title opacity-75">Animals</h6>
+                        <h2 class="mb-0">{{ stats.animals }}</h2>
+                    </div>
+                    <i class="bi bi-bug fs-1 opacity-50"></i>  
+                </div>
+                <small>{{ stats.available }} available</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-bg-success">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h6 class="card-title opacity-75">Adopters</h6>
+                        <h2 class="mb-0">{{ stats.adopters }}</h2>
+                    </div>
+                    <i class="bi bi-people fs-1 opacity-50"></i>
+                </div>
+                <small>registered</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-bg-info">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h6 class="card-title opacity-75">Adoptions</h6>
+                        <h2 class="mb-0">{{ stats.adoptions }}</h2>
+                    </div>
+                    <i class="bi bi-hand-thumbs-up fs-1 opacity-50"></i>
+                </div>
+                <small>completed</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-bg-warning">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h6 class="card-title opacity-75">Donations</h6>
+                        <h2 class="mb-0">{{ stats.donations }}</h2>
+                    </div>
+                    <i class="bi bi-currency-dollar fs-1 opacity-50"></i>
+                </div>
+                <small>${{ "%.2f"|format(stats.total_donated|float) }} total</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-2">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="mb-0">{{ stats.shelters }}</h5>
+                <small class="text-muted">Shelters</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="mb-0">{{ stats.staff }}</h5>
+                <small class="text-muted">Staff</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="mb-0">{{ stats.medical_records }}</h5>
+                <small class="text-muted">Medical Records</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Top Shelters by Animal Count</div>
+            <div class="card-body p-0">
+                <table class="table table-sm mb-0">
+                    <thead><tr><th>Shelter</th><th>City</th><th>Animals</th></tr></thead>
+                    <tbody>
+                    {% for s in stats.top_shelters %}
+                        <tr><td>{{ s.name }}</td><td>{{ s.city }}</td><td>{{ s.animal_count }}</td></tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Recent Adoptions</div>
+            <div class="card-body p-0">
+                <table class="table table-sm mb-0">
+                    <thead><tr><th>Animal</th><th>Species</th><th>Date</th></tr></thead>
+                    <tbody>
+                    {% for a in stats.recent_adoptions %}
+                        <tr><td>{{ a.name }}</td><td>{{ a.species }}</td><td>{{ a.adoption_date }}</td></tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

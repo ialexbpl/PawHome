@@ -1,0 +1,1 @@
+python -c "from db.postgres_connection import get_connection; conn = get_connection(); print('Connected to:', conn.info.dbname); conn.close(); print('Connection OK!')"

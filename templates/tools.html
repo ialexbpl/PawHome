@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block title %}Tools — PawHome{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Tools</h2>
+
+<div class="row g-4">
+    <!-- Generator -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <i class="bi bi-database-add me-2"></i>Data Generator
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Generate random data for all key tables. Specify the number of animal rows — other tables scale proportionally.</p>
+                <form method="post" action="/tools/generate">
+                    <div class="input-group mb-3">
+                        <input name="count" type="number" min="1" max="50000" value="1000"
+                               class="form-control" placeholder="Number of animals">
+                        <button class="btn btn-success" type="submit">
+                            <i class="bi bi-play-fill me-1"></i>Generate
+                        </button>
+                    </div>
+                    <small class="text-muted">Can be run multiple times — data appends without conflicts.</small>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Benchmark -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <i class="bi bi-speedometer me-2"></i>Performance Benchmark
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Run EXPLAIN ANALYZE on test queries with and without indexes at 100, 1000, and 5000 rows. Results saved to <code>analysis/performance_results.md</code>.</p>
+                <form method="post" action="/tools/benchmark">
+                    <button class="btn btn-warning" type="submit">
+                        <i class="bi bi-lightning-fill me-1"></i>Run Benchmark
+                    </button>
+                </form>
+                <small class="text-muted mt-2 d-block">This resets the database for each volume. May take several minutes.</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <i class="bi bi-download me-2"></i>Export Data
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Export all tables to a downloadable file.</p>
+                <div class="d-flex gap-2">
+                    <form method="post" action="/tools/export">
+                        <input type="hidden" name="format" value="json">
+                        <button class="btn btn-outline-primary" type="submit">
+                            <i class="bi bi-filetype-json me-1"></i>Export JSON
+                        </button>
+                    </form>
+                    <form method="post" action="/tools/export">
+                        <input type="hidden" name="format" value="xml">
+                        <button class="btn btn-outline-primary" type="submit">
+                            <i class="bi bi-filetype-xml me-1"></i>Export XML
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <i class="bi bi-upload me-2"></i>Import Data
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Import data from a JSON or XML file. Duplicate rows are skipped.</p>
+                <form method="post" action="/tools/import" enctype="multipart/form-data">
+                    <div class="input-group">
+                        <input name="file" type="file" accept=".json,.xml" class="form-control" required>
+                        <button class="btn btn-outline-success" type="submit">
+                            <i class="bi bi-upload me-1"></i>Import
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Drop All / Reset -->
+    <div class="col-md-6">
+        <div class="card border-danger">
+            <div class="card-header text-danger">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>Danger Zone
+            </div>
+            <div class="card-body">
+                <p class="text-muted">
+                    Drop all existing data and reset the database schema. Dictionary tables are re-seeded, key tables become empty.
+                </p>
+                <form method="post" action="/tools/drop-all"
+                      onsubmit="return confirm('This will permanently remove all current data and reset the database. Continue?');">
+                    <button class="btn btn-danger" type="submit">
+                        <i class="bi bi-trash-fill me-1"></i>Drop All (Reset DB)
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

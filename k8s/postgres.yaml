@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pawhome-postgres-pvc
+  namespace: pawhome
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pawhome-postgres
+  namespace: pawhome
+spec:
+  serviceName: pawhome-postgres
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pawhome-postgres
+  template:
+    metadata:
+      labels:
+        app: pawhome-postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: pawhome
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pawhome-postgres-secret
+                  key: POSTGRES_PASSWORD
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
+            - name: postgres-init
+              mountPath: /docker-entrypoint-initdb.d
+          readinessProbe:
+            tcpSocket:
+              port: 5432
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 5432
+            initialDelaySeconds: 20
+            periodSeconds: 20
+      volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: pawhome-postgres-pvc
+        - name: postgres-init
+          configMap:
+            name: pawhome-db-init
+            items:
+              - key: create_schema.sql
+                path: 01_create_schema.sql
+              - key: seed_dictionaries.sql
+                path: 02_seed_dictionaries.sql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pawhome-postgres
+  namespace: pawhome
+spec:
+  selector:
+    app: pawhome-postgres
+  ports:
+    - name: postgres
+      port: 5432
+      targetPort: 5432

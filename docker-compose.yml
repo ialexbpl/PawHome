@@ -1,0 +1,26 @@
+# Flask in Docker → PostgreSQL on your laptop (not a container).
+# Put DB_NAME, DB_USER, DB_PASSWORD, DB_PORT in .env (same as local dev).
+# DB_HOST is forced to host.docker.internal so the container reaches your PC.
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    environment:
+      # Must reach Postgres on your PC; localhost inside the container is NOT your laptop.
+      DB_HOST: host.docker.internal
+    volumes:
+      - .:/app
+    command: ["flask", "run", "--host=0.0.0.0", "--port=5000", "--debug"]
+
+  # Log viewer UI — open http://localhost:8888 (all Docker Desktop containers)
+  dozzle:
+    image: amir20/dozzle:latest
+    ports:
+      - "8888:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: unless-stopped
