@@ -10,11 +10,16 @@
 - [x] Add Argo CD `Application` manifest template for one-command bootstrap (`argocd/pawhome-application.yaml`).
 - [x] Add repository `.gitignore` for Python, local env files, and generated artifacts.
 - [x] Refocus README to lead with CI/CD and Kubernetes GitOps deployment workflow.
-- [x] Expose app service as MetalLB `LoadBalancer` with fixed IP for cluster access (`k8s/web-deployment-service.yaml`).
-- [x] Add static PV + manual storage class binding for clusters without dynamic provisioner (`k8s/postgres-pv.yaml`, `k8s/postgres-statefulset-pvc-service.yaml`).
+- [x] Expose app service as MetalLB `LoadBalancer` for external cluster access (`k8s/web-deployment-service.yaml`).
+- [x] Standardize PostgreSQL storage on k3s default dynamic provisioning (`local-path`) for multi-node compatibility (`k8s/postgres-statefulset-pvc-service.yaml`).
 - [x] Remove Docker Compose file to keep repository Kubernetes/Argo focused.
 - [x] Align README deployment path to k3s + Argo CD + MetalLB with GHCR pull-secret flow.
 - [x] Upgrade Kubernetes PostgreSQL runtime image from `postgres:16` to `postgres:18`.
+- [x] Add `DEPLOYMENT_PLAN.md` with clean end-to-end k3s + Argo runbook.
+- [x] Harden app and DB probes for cluster startup sequencing (`app.py`, `k8s/web-deployment-service.yaml`, `k8s/postgres-statefulset-pvc-service.yaml`).
+- [x] Make Argo deployment multi-node friendly by using `local-path` PVC and removing mandatory private registry secret (`k8s/kustomization.yaml`, `k8s/postgres-statefulset-pvc-service.yaml`, `k8s/web-deployment-service.yaml`, `argocd/pawhome-application.yaml`).
+- [x] Remove legacy static PV and generated export/performance artifacts from git-tracked content (`k8s/postgres-pv.yaml`, `exports/`, `analysis/performance_results.md`).
+- [x] Add missing environment template and align deployment runbook/docs with current manifests (`.env.example`, `DEPLOYMENT_PLAN.md`, `README.md`).
 
 ## Next
 - [ ] Add ingress manifest (or gateway) for stable external access without port-forward.
@@ -22,3 +27,4 @@
 - [ ] Add backup/restore strategy for PostgreSQL PVC data.
 - [ ] Add CI pipeline job that builds, pushes, and deploys to Kubernetes automatically.
 - [ ] Replace plain Secret with Sealed Secrets or External Secrets for safer Git storage.
+- [ ] Add Ingress + TLS (cert-manager) so app is reachable via DNS instead of bare LoadBalancer IP.

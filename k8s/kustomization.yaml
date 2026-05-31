@@ -5,7 +5,6 @@ namespace: pawhome
 
 resources:
   - namespace-pawhome.yaml
-  - postgres-pv.yaml
   - postgres-secret.yaml
   - db-init-configmap.yaml
   - postgres-statefulset-pvc-service.yaml

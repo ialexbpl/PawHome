@@ -4,7 +4,7 @@ metadata:
   name: pawhome-postgres-pvc
   namespace: pawhome
 spec:
-  storageClassName: manual
+  storageClassName: local-path
   accessModes:
     - ReadWriteOnce
   resources:
@@ -48,6 +48,11 @@ spec:
               mountPath: /var/lib/postgresql
             - name: postgres-init
               mountPath: /docker-entrypoint-initdb.d
+          startupProbe:
+            tcpSocket:
+              port: 5432
+            failureThreshold: 60
+            periodSeconds: 5
           readinessProbe:
             tcpSocket:
               port: 5432

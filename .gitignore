@@ -35,3 +35,4 @@ dist/
 
 # Local analysis/output artifacts
 analysis/*.md
+exports/

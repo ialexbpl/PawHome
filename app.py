@@ -103,6 +103,27 @@ def get_animals_list():
 
 
 # ---------------------------------------------------------------------------
+# Health checks
+# ---------------------------------------------------------------------------
+
+@app.route("/healthz/live")
+def health_live():
+    return {"status": "alive"}, 200
+
+
+@app.route("/healthz/ready")
+def health_ready():
+    try:
+        conn = get_db()
+        cur = conn.cursor()
+        cur.execute("SELECT 1")
+        cur.close()
+        return {"status": "ready"}, 200
+    except Exception:
+        return {"status": "not_ready"}, 503
+
+
+# ---------------------------------------------------------------------------
 # Dashboard
 # ---------------------------------------------------------------------------
 

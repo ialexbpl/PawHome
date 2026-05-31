@@ -13,12 +13,10 @@ spec:
       labels:
         app: pawhome-web
     spec:
-      imagePullSecrets:
-        - name: regcred
       containers:
         - name: pawhome-web
           image: ghcr.io/ialexbpl/pawhome:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
           env:
@@ -35,17 +33,23 @@ spec:
                 secretKeyRef:
                   name: pawhome-postgres-secret
                   key: POSTGRES_PASSWORD
+          startupProbe:
+            httpGet:
+              path: /healthz/live
+              port: 5000
+            failureThreshold: 30
+            periodSeconds: 5
           readinessProbe:
             httpGet:
-              path: /
+              path: /healthz/ready
               port: 5000
-            initialDelaySeconds: 20
+            initialDelaySeconds: 5
             periodSeconds: 10
           livenessProbe:
             httpGet:
-              path: /
+              path: /healthz/live
               port: 5000
-            initialDelaySeconds: 40
+            initialDelaySeconds: 10
             periodSeconds: 20
           resources:
             requests:
