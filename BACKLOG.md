@@ -14,6 +14,7 @@
 - [x] Add static PV + manual storage class binding for clusters without dynamic provisioner (`k8s/postgres-pv.yaml`, `k8s/postgres.yaml`).
 - [x] Remove Docker Compose file to keep repository Kubernetes/Argo focused.
 - [x] Align README deployment path to k3s + Argo CD + MetalLB with GHCR pull-secret flow.
+- [x] Upgrade Kubernetes PostgreSQL runtime image from `postgres:16` to `postgres:18`.
 
 ## Next
 - [ ] Add ingress manifest (or gateway) for stable external access without port-forward.
