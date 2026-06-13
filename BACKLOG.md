@@ -22,6 +22,7 @@
 - [x] Add missing environment template and align deployment runbook/docs with current manifests (`.env.example`, `DEPLOYMENT_PLAN.md`, `README.md`).
 - [x] Refactor deployment model to app-only Kubernetes with external PostgreSQL (Docker on VM) and remove in-cluster DB manifests (`k8s/kustomization.yaml`, `k8s/web-deployment-service.yaml`, `scripts/push-and-deploy.ps1`, `README.md`, `DEPLOYMENT_PLAN.md`).
 - [x] Remove obsolete in-cluster PostgreSQL resources from repo (`k8s/postgres-statefulset-pvc-service.yaml`, `k8s/db-init-configmap.yaml`).
+- [x] Add explicit README runbook for pushing repo changes and syncing Argo CD state (`README.md`).
 
 ## Next
 - [ ] Add ingress manifest (or gateway) for stable external access without port-forward.

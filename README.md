@@ -49,6 +49,31 @@ kubectl apply -f argocd/pawhome-application.yaml -n argocd
 
 After that, Argo CD tracks this repo and reconciles changes automatically.
 
+### Sync repo changes to Argo CD
+
+Use this flow any time you modify manifests or app image tags and want Argo to apply them:
+
+```bash
+# 1) Commit and push your local repo changes
+cd ~/PawHome
+git add .
+git commit -m "Update deployment manifests"
+git push origin main
+
+# 2) Ensure Argo Application exists
+kubectl apply -f argocd/pawhome-application.yaml -n argocd
+
+# 3) Force refresh/sync check (optional but useful)
+kubectl -n argocd annotate application pawhome argocd.argoproj.io/refresh=hard --overwrite
+kubectl -n argocd get application pawhome -o jsonpath='{.status.sync.status}{" | "}{.status.health.status}{"\n"}'
+
+# 4) Verify in workload namespace
+kubectl -n pawhome get pods,svc
+kubectl -n pawhome logs deployment/pawhome-web --tail=80
+```
+
+If status is not `Synced | Healthy`, wait 10-20 seconds and run the status check again.
+
 ---
 
 ## Release Workflow (GitOps)

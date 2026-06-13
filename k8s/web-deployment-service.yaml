@@ -21,7 +21,7 @@ spec:
             - containerPort: 5000
           env:
             - name: DB_HOST
-              value: REPLACE_WITH_VM_DB_IP
+              value: 192.168.5.15
             - name: DB_PORT
               value: "5432"
             - name: DB_NAME
