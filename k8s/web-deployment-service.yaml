@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: pawhome-web
-          image: ghcr.io/ialexbpl/pawhome:20260531-1421-59cf2fc
+          image: ghcr.io/ialexbpl/pawhome:20260531-1444-e11f3f8
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
