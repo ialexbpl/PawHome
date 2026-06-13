@@ -1,0 +1,14 @@
+# Ignore everything
+*
+
+# Explicitly track these files
+!.gitignore
+!mikrotik.md
+!mikrotik.pdf
+!mikrotik.drawio
+!mikrotik.backup.rsc
+!dns_setup.rsc
+!dns_records.rsc
+!set_network.sh
+!add_pd1_ports.rsc
+!Step_by_step_guide.md
