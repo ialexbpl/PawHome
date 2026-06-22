@@ -42,3 +42,14 @@ kubectl apply -f argocd/pawhome-application.yaml -n argocd
 1. If image is private, create `regcred` and add `imagePullSecrets` to web Deployment.
 2. If `LoadBalancer` has no external IP, verify MetalLB installation and pool configuration.
 3. If app cannot connect to DB, verify VM firewall and network ACLs allow `5432/tcp` from cluster nodes.
+
+## Repo verification (current)
+
+Confirm the repository contains the following Kubernetes manifests under `k8s/` used by the runbook:
+
+- `k8s/kustomization.yaml`
+- `k8s/namespace-pawhome.yaml`
+- `k8s/web-deployment-service.yaml` (web Deployment + Service manifest)
+- `k8s/postgres-secret.yaml` (external DB secret template)
+
+If you plan to change this model (for example re-introduce in-cluster Postgres), update this document and `k8s/kustomization.yaml` accordingly.

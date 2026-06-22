@@ -1,0 +1,32 @@
+//THIS IS A TEST VAGRANT FILE FOR THE COURSE INSTRUCTIONS. IT DEFINES THREE WINDOWS 10 VIRTUAL MACHINES USING HYPERV AS THE PROVIDER. EACH VM IS CONFIGURED WITH 4GB OF RAM AND 2 CPU CORES, AND THEY ARE CONNECTED TO THE PUBLIC NETWORK USING THE "Default Switch" BRIDGE.
+
+Vagrant.configure("2") do |config|
+
+  config.vm.define "win1" do |win|
+    win.vm.box = "gusztavvargadr/windows-10"
+    win.vm.provider "hyperv" do |h|
+      h.memory = 4096
+      h.cpus = 2
+    end
+    win.vm.network "public_network", bridge: "Default Switch"
+  end
+
+  config.vm.define "win2" do |win|
+    win.vm.box = "gusztavvargadr/windows-10"
+    win.vm.provider "hyperv" do |h|
+      h.memory = 4096
+      h.cpus = 2
+    end
+    win.vm.network "public_network", bridge: "Default Switch"
+  end
+
+  config.vm.define "win3" do |win|
+    win.vm.box = "gusztavvargadr/windows-10"
+    win.vm.provider "hyperv" do |h|
+      h.memory = 4096
+      h.cpus = 2
+    end
+    win.vm.network "public_network", bridge: "Default Switch"
+  end
+
+end

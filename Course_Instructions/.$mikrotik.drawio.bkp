@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="900" math="0" shadow="0">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+
+    <!-- ═══ TITLE ═══ -->
+    <mxCell id="5" value="MikroTik CRS354-48G-4S+2Q+RM — Network Topology" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="150" y="15" width="800" height="32" as="geometry"/>
+    </mxCell>
+
+    <!-- ═══ UPSTREAM NETWORK ═══ -->
+    <mxCell id="10" value="Upstream Network" style="shape=mxgraph.cisco.sites.generic_building;sketch=0;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;align=center;outlineConnect=0;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="620" y="60" width="65" height="65" as="geometry"/>
+    </mxCell>
+
+    <!-- ═══ SWITCH CHASSIS ═══ -->
+    <mxCell id="20" value="MikroTik CRS354-48G-4S+2Q+RM   |   bridge-wan" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#555555;strokeWidth=3;fontSize=12;fontStyle=1;fontColor=#333333;verticalAlign=top;" vertex="1" parent="1">
+      <mxGeometry x="50" y="220" width="840" height="175" as="geometry"/>
+    </mxCell>
+
+    <!-- Section headers -->
+    <mxCell id="21" value="Odd: 1, 3, 5 … 47" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="58" y="244" width="160" height="14" as="geometry"/>
+    </mxCell>
+    <mxCell id="22" value="Even: 2, 4, 6 … 48" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="58" y="275" width="160" height="14" as="geometry"/>
+    </mxCell>
+    <mxCell id="23" value="SFP+" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="692" y="244" width="70" height="14" as="geometry"/>
+    </mxCell>
+    <mxCell id="24" value="QSFP+" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="775" y="244" width="90" height="14" as="geometry"/>
+    </mxCell>
+
+    <!-- Separators -->
+    <mxCell id="25" value="" style="line;strokeColor=#aaaaaa;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="686" y="244" width="2" height="130" as="geometry"/>
+    </mxCell>
+    <mxCell id="26" value="" style="line;strokeColor=#aaaaaa;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="770" y="244" width="2" height="130" as="geometry"/>
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════════════
+         TOP ROW — odd ports (1,3,5…47)   y=262
+         pos=(n+1)/2   x=70+(pos-1)*26
+         ═══════════════════════════════════════════════════ -->
+    <!-- pos1  ether1  bond1/N1 green -->
+    <mxCell id="101" value="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=8;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="70" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos2  ether3  unused -->
+    <mxCell id="103" value="3" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="96" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos3  ether5  unused -->
+    <mxCell id="105" value="5" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="122" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos4  ether7  unused -->
+    <mxCell id="107" value="7" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="148" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos5  ether9  PD orange -->
+    <mxCell id="109" value="9" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=8;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="174" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos6  ether11 PD orange -->
+    <mxCell id="111" value="11" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=8;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="200" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos7  ether13 bond1/N1 green -->
+    <mxCell id="113" value="13" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=8;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="226" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos8  ether15 unused -->
+    <mxCell id="115" value="15" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="252" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos9  ether17 unused -->
+    <mxCell id="117" value="17" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="278" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos10 ether19 unused -->
+    <mxCell id="119" value="19" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="304" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos11 ether21 PD orange -->
+    <mxCell id="121" value="21" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=8;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="330" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos12 ether23 PD orange -->
+    <mxCell id="123" value="23" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=8;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="356" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos13 ether25 bond3/N3 blue -->
+    <mxCell id="125" value="25" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=8;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="382" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos14 ether27 unused -->
+    <mxCell id="127" value="27" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="408" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos15 ether29 unused -->
+    <mxCell id="129" value="29" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="434" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos16 ether31 unused -->
+    <mxCell id="131" value="31" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="460" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos17 ether33 unused -->
+    <mxCell id="133" value="33" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="486" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos18 ether35 unused -->
+    <mxCell id="135" value="35" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="512" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos19 ether37 bond3/N3 blue -->
+    <mxCell id="137" value="37" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=8;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="538" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos20 ether39 unused -->
+    <mxCell id="139" value="39" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="564" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos21 ether41 unused -->
+    <mxCell id="141" value="41" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="590" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos22 ether43 unused -->
+    <mxCell id="143" value="43" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="616" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos23 ether45 unused -->
+    <mxCell id="145" value="45" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="642" y="262" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos24 ether47 unused -->
+    <mxCell id="147" value="47" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="668" y="262" width="22" height="26" as="geometry"/></mxCell>
+
+    <!-- ═══════════════════════════════════════════════════
+         BOTTOM ROW — even ports (2,4,6…48)   y=294
+         pos=n/2   x=70+(pos-1)*26
+         ═══════════════════════════════════════════════════ -->
+    <!-- pos1  ether2  bond2/N2 yellow -->
+    <mxCell id="102" value="2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=8;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="70" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos2  ether4  unused -->
+    <mxCell id="104" value="4" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="96" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos3  ether6  unused -->
+    <mxCell id="106" value="6" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="122" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos4  ether8  unused -->
+    <mxCell id="108" value="8" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="148" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos5  ether10 unused -->
+    <mxCell id="110" value="10" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="174" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos6  ether12 PD orange -->
+    <mxCell id="112" value="12" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=8;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="200" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos7  ether14 bond2/N2 yellow -->
+    <mxCell id="114" value="14" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=8;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="226" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos8  ether16 unused -->
+    <mxCell id="116" value="16" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="252" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos9  ether18 unused -->
+    <mxCell id="118" value="18" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="278" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos10 ether20 unused -->
+    <mxCell id="120" value="20" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="304" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos11 ether22 PD orange -->
+    <mxCell id="122" value="22" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=8;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="330" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos12 ether24 PD orange -->
+    <mxCell id="124" value="24" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=8;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="356" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos13 ether26 bond4/N4 red -->
+    <mxCell id="126" value="26" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=8;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="382" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos14 ether28 unused -->
+    <mxCell id="128" value="28" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="408" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos15 ether30 unused -->
+    <mxCell id="130" value="30" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="434" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos16 ether32 unused -->
+    <mxCell id="132" value="32" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="460" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos17 ether34 unused -->
+    <mxCell id="134" value="34" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="486" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos18 ether36 unused -->
+    <mxCell id="136" value="36" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="512" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos19 ether38 bond4/N4 red -->
+    <mxCell id="138" value="38" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=8;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="538" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos20 ether40 unused -->
+    <mxCell id="140" value="40" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="564" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos21 ether42 unused -->
+    <mxCell id="142" value="42" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="590" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos22 ether44 unused -->
+    <mxCell id="144" value="44" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="616" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos23 ether46 unused -->
+    <mxCell id="146" value="46" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="642" y="294" width="22" height="26" as="geometry"/></mxCell>
+    <!-- pos24 ether48 WAN purple -->
+    <mxCell id="148" value="48" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=8;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="668" y="294" width="22" height="26" as="geometry"/></mxCell>
+
+    <!-- ═══ SFP+ PORTS ═══ -->
+    <mxCell id="201" value="SFP1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="700" y="262" width="32" height="26" as="geometry"/></mxCell>
+    <mxCell id="202" value="SFP2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="736" y="262" width="32" height="26" as="geometry"/></mxCell>
+    <mxCell id="203" value="SFP3" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="700" y="294" width="32" height="26" as="geometry"/></mxCell>
+    <mxCell id="204" value="SFP4" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=8;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="736" y="294" width="32" height="26" as="geometry"/></mxCell>
+
+    <!-- ═══ QSFP+ PORTS ═══ -->
+    <mxCell id="211" value="Q1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=9;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="780" y="258" width="44" height="64" as="geometry"/></mxCell>
+    <mxCell id="212" value="Q2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontSize=9;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="830" y="258" width="44" height="64" as="geometry"/></mxCell>
+
+    <!-- ═══ BOND AGGREGATION POINTS ═══ -->
+    <mxCell id="350" value="bond1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;fontSize=10;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="90" y="475" width="75" height="26" as="geometry"/></mxCell>
+    <mxCell id="351" value="bond2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=10;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="255" y="475" width="75" height="26" as="geometry"/></mxCell>
+    <mxCell id="352" value="bond3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;fontSize=10;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="390" y="475" width="75" height="26" as="geometry"/></mxCell>
+    <mxCell id="353" value="bond4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;fontSize=10;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="555" y="475" width="75" height="26" as="geometry"/></mxCell>
+
+    <!-- ═══ NODES ═══ -->
+    <mxCell id="300" value="OPHWNODE01&#xa;Apple Mac Pro&#xa;10.254.254.118" style="shape=mxgraph.cisco.servers.standard_server;sketch=0;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;align=center;outlineConnect=0;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="90" y="560" width="55" height="70" as="geometry"/>
+    </mxCell>
+    <mxCell id="301" value="OPHWNODE02&#xa;Apple Mac Pro&#xa;10.254.254.113" style="shape=mxgraph.cisco.servers.standard_server;sketch=0;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;align=center;outlineConnect=0;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="255" y="560" width="55" height="70" as="geometry"/>
+    </mxCell>
+    <mxCell id="302" value="OPHWNODE03&#xa;Apple Mac Pro&#xa;10.254.254.117" style="shape=mxgraph.cisco.servers.standard_server;sketch=0;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;align=center;outlineConnect=0;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="390" y="560" width="55" height="70" as="geometry"/>
+    </mxCell>
+    <mxCell id="303" value="OPHWNODE04&#xa;Apple Mac Pro&#xa;10.254.254.116" style="shape=mxgraph.cisco.servers.standard_server;sketch=0;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;align=center;outlineConnect=0;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="555" y="560" width="55" height="70" as="geometry"/>
+    </mxCell>
+
+    <!-- ═══ PD1 DISTRIBUTION PANEL ═══ -->
+    <mxCell id="370" value="PD1 — Distribution Panel" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=3;fontSize=12;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+      <mxGeometry x="960" y="220" width="280" height="230" as="geometry"/>
+    </mxCell>
+
+    <!-- PD1 individual ports -->
+    <mxCell id="601" value="PD1/124  ←  ether9" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;align=left;spacingLeft=6;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="975" y="255" width="250" height="26" as="geometry"/></mxCell>
+    <mxCell id="602" value="PD1/123  ←  ether12" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;align=left;spacingLeft=6;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="975" y="285" width="250" height="26" as="geometry"/></mxCell>
+    <mxCell id="603" value="PD1/122  ←  ether11" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;align=left;spacingLeft=6;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="975" y="315" width="250" height="26" as="geometry"/></mxCell>
+    <mxCell id="604" value="PD1/121  ←  ether22" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;align=left;spacingLeft=6;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="975" y="345" width="250" height="26" as="geometry"/></mxCell>
+    <mxCell id="605" value="PD1/120  ←  ether21" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;align=left;spacingLeft=6;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="975" y="375" width="250" height="26" as="geometry"/></mxCell>
+    <mxCell id="606" value="PD1/119  ←  ether23" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;align=left;spacingLeft=6;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="975" y="405" width="250" height="26" as="geometry"/></mxCell>
+    <mxCell id="607" value="PD1/118  ←  ether24" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;align=left;spacingLeft=6;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="975" y="435" width="250" height="26" as="geometry"/></mxCell>
+
+    <!-- ═══ EDGES: switch ports → bond buses ═══ -->
+    <mxCell id="400" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=1;strokeColor=#82b366;" edge="1" source="101" target="350" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="401" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=1;strokeColor=#82b366;dashed=1;" edge="1" source="113" target="350" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="402" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=1;strokeColor=#d6b656;" edge="1" source="102" target="351" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="403" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=1;strokeColor=#d6b656;dashed=1;" edge="1" source="114" target="351" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="404" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=1;strokeColor=#6c8ebf;" edge="1" source="125" target="352" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="405" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=1;strokeColor=#6c8ebf;dashed=1;" edge="1" source="137" target="352" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="406" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=1;strokeColor=#b85450;" edge="1" source="126" target="353" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="407" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=1;strokeColor=#b85450;dashed=1;" edge="1" source="138" target="353" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+    <!-- ═══ EDGES: bond buses → nodes ═══ -->
+    <mxCell id="410" value="LACP 802.3ad&#xa;2×1G" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=2;strokeColor=#82b366;fontSize=9;" edge="1" source="350" target="300" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="411" value="LACP 802.3ad&#xa;2×1G" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=2;strokeColor=#d6b656;fontSize=9;" edge="1" source="351" target="301" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="412" value="LACP 802.3ad&#xa;2×1G" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=2;strokeColor=#6c8ebf;fontSize=9;" edge="1" source="352" target="302" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="413" value="LACP 802.3ad&#xa;2×1G" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=2;strokeColor=#b85450;fontSize=9;" edge="1" source="353" target="303" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+    <!-- ═══ EDGES: switch PD ports → PD panel ports ═══ -->
+    <mxCell id="430" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=1;strokeColor=#d79b00;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" source="109" target="601" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="431" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=1;strokeColor=#d79b00;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" source="112" target="602" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="432" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=1;strokeColor=#d79b00;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" source="111" target="603" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="433" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=1;strokeColor=#d79b00;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" source="122" target="604" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="434" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=1;strokeColor=#d79b00;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" source="121" target="605" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="435" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=1;strokeColor=#d79b00;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" source="123" target="606" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="436" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=1;strokeColor=#d79b00;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" source="124" target="607" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+    <!-- ═══ EDGE: ether48 → upstream ═══ -->
+    <mxCell id="420" value="ether48 / WAN-ETH" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=2;strokeColor=#9673a6;fontSize=10;" edge="1" source="148" target="10" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+    <!-- ═══ LEGEND ═══ -->
+    <mxCell id="500" value="Legend" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="1290" y="220" width="100" height="22" as="geometry"/></mxCell>
+    <mxCell id="501" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="1290" y="250" width="20" height="20" as="geometry"/></mxCell>
+    <mxCell id="502" value="bond1 — Node 1 (ether1, ether13)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="1"><mxGeometry x="1316" y="250" width="220" height="20" as="geometry"/></mxCell>
+    <mxCell id="503" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1"><mxGeometry x="1290" y="276" width="20" height="20" as="geometry"/></mxCell>
+    <mxCell id="504" value="bond2 — Node 2 (ether2, ether14)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="1"><mxGeometry x="1316" y="276" width="220" height="20" as="geometry"/></mxCell>
+    <mxCell id="505" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="1290" y="302" width="20" height="20" as="geometry"/></mxCell>
+    <mxCell id="506" value="bond3 — Node 3 (ether25, ether37)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="1"><mxGeometry x="1316" y="302" width="220" height="20" as="geometry"/></mxCell>
+    <mxCell id="507" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1"><mxGeometry x="1290" y="328" width="20" height="20" as="geometry"/></mxCell>
+    <mxCell id="508" value="bond4 — Node 4 (ether26, ether38)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="1"><mxGeometry x="1316" y="328" width="220" height="20" as="geometry"/></mxCell>
+    <mxCell id="509" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1"><mxGeometry x="1290" y="354" width="20" height="20" as="geometry"/></mxCell>
+    <mxCell id="510" value="Distribution panel PD1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="1"><mxGeometry x="1316" y="354" width="220" height="20" as="geometry"/></mxCell>
+    <mxCell id="511" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1"><mxGeometry x="1290" y="380" width="20" height="20" as="geometry"/></mxCell>
+    <mxCell id="512" value="WAN uplink (ether48)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="1"><mxGeometry x="1316" y="380" width="220" height="20" as="geometry"/></mxCell>
+    <mxCell id="513" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;" vertex="1" parent="1"><mxGeometry x="1290" y="406" width="20" height="20" as="geometry"/></mxCell>
+    <mxCell id="514" value="Unused" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="1"><mxGeometry x="1316" y="406" width="220" height="20" as="geometry"/></mxCell>
+
+  </root>
+</mxGraphModel>
