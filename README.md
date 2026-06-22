@@ -667,4 +667,4 @@ Database-labs/
 
 ## License
 
-This project is created for educational purposes as part of a university Database course.
+This project is created for educational purposes as part of a university Database course and later on used on a Kubernetes baremetal bootcamp.
